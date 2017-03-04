@@ -1,0 +1,25 @@
+{
+  "name": "tapbundle",
+  "version": "1.0.0",
+  "description": "tap bundled for tapbuffer",
+  "main": "dist/index.js",
+  "typings": "dsit/index.d.ts",
+  "scripts": {
+    "test": "(npmts)"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@gitlab.com/pushrocks/tapbundle.git"
+  },
+  "author": "Lossless GmbH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://gitlab.com/pushrocks/tapbundle/issues"
+  },
+  "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
+  "dependencies": {
+    "smartchai": "^1.0.3",
+    "tap": "^10.3.0",
+    "typings-global": "^1.0.14"
+  }
+}
