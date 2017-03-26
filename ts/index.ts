@@ -1,5 +1,5 @@
 import 'typings-global'
-import * as tap from 'tap'
+let tap = require('tap')
 import { expect } from 'smartchai'
 
 export {
