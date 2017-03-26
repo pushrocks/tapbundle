@@ -21,6 +21,19 @@ tap bundled for tapbuffer
 ## Usage
 Use TypeScript for best in class instellisense.
 
+note this package includes
+
+* tap
+* chai
+* chai-as-promised
+* @types/tap
+* @types/chai
+* @types/chai-as-promised
+
+```javascript
+import {tap, expect} from 'tapbundle' // has typings in place
+```
+
 For further information read the linked docs at the top of this README.
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
