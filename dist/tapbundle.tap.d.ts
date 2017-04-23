@@ -1,4 +1,4 @@
-export declare type TTestStatus = 'success' | 'error' | 'pending';
+export declare type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess';
 export interface ITestFunction {
     (): Promise<any>;
 }
@@ -23,8 +23,24 @@ export declare class TapTest {
 }
 export declare class Tap {
     private _tests;
+    /**
+     * Normal test function, will run one by one
+     * @param testDescription - A description of what the test does
+     * @param testFunction - A Function that returns a Promise and resolves or rejects
+     */
     test(testDescription: string, testFunction: ITestFunction): Promise<void>;
+    /**
+     * A parallel test that will not be waited for before the next starts.
+     * @param testDescription - A description of what the test does
+     * @param testFunction - A Function that returns a Promise and resolves or rejects
+     */
     testParallel(testDescription: string, testFunction: ITestFunction): void;
+    /**
+     * tests leakage
+     * @param testDescription - A description of what the test does
+     * @param testFunction - A Function that returns a Promise and resolves or rejects
+     */
+    testLeakage(testDescription: string, testFunction: ITestFunction): void;
     /**
      * starts the test evaluation
      */

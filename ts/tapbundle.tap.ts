@@ -1,7 +1,9 @@
 import * as plugins from './tapbundle.plugins'
 
+import { tapCreator } from './tapbundle.tapcreator'
+
 // interfaces
-export type TTestStatus = 'success' | 'error' | 'pending'
+export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess'
 
 export interface ITestFunction {
   (): Promise<any>
@@ -35,8 +37,14 @@ export class TapTest {
   async run (testKeyArg: number) {
     try {
       await this.testFunction()
-      console.log(`ok ${testKeyArg + 1} - ${this.description}`)
+      console.log(`ok ${testKeyArg + 1} - ${this.description} # time=20.040ms`)
+      this.status = 'success'
     } catch (err) {
+      console.log(`not ok ${testKeyArg + 1} - ${this.description} # time=20.040ms`)
+      if (this.status === 'success') {
+        this.status = 'errorAfterSuccess'
+        console.log('!!! ALERT !!!: weird behaviour, since test has been already successfull')
+      }
       console.log(err)
     }
   }
@@ -45,6 +53,11 @@ export class TapTest {
 export class Tap {
   private _tests: TapTest[] = []
 
+  /**
+   * Normal test function, will run one by one
+   * @param testDescription - A description of what the test does
+   * @param testFunction - A Function that returns a Promise and resolves or rejects
+   */
   async test (testDescription: string, testFunction: ITestFunction) {
     this._tests.push(new TapTest({
       description: testDescription,
@@ -53,12 +66,26 @@ export class Tap {
     }))
   }
 
+  /**
+   * A parallel test that will not be waited for before the next starts.
+   * @param testDescription - A description of what the test does
+   * @param testFunction - A Function that returns a Promise and resolves or rejects
+   */
   testParallel (testDescription: string, testFunction: ITestFunction) {
     this._tests.push(new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: true
     }))
+  }
+
+  /**
+   * tests leakage
+   * @param testDescription - A description of what the test does
+   * @param testFunction - A Function that returns a Promise and resolves or rejects
+   */
+  testLeakage (testDescription: string, testFunction: ITestFunction) {
+
   }
 
   /**
