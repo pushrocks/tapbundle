@@ -21,14 +21,16 @@ tap bundled for tapbuffer
 ## Usage
 Use TypeScript for best in class instellisense.
 
-note this package includes
+This package includes
 
-* tap
-* chai
-* chai-as-promised
-* @types/tap
-* @types/chai
-* @types/chai-as-promised
+* tap compatible testing framework written in TypeScript
+* npm package chai
+* npm package chai-as-promised
+* npm package @types/tap
+* npm pacakge @types/chai
+* npm package @types/chai-as-promised
+
+In other words: This pacakge is fully typed :)
 
 ```javascript
 import {tap, expect} from 'tapbundle' // has typings in place
