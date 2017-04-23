@@ -1,4 +1,4 @@
 import 'typings-global';
-import * as tap from 'tap';
 import { expect } from 'smartchai';
+import { tap } from './tapbundle.tap';
 export { tap, expect };

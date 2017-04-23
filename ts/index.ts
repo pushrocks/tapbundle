@@ -1,6 +1,7 @@
 import 'typings-global'
-let tap = require('tap')
 import { expect } from 'smartchai'
+import { tap } from './tapbundle.tap'
+
 
 export {
   tap,
