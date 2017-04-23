@@ -18,6 +18,22 @@ tap bundled for tapbuffer
 [![node](https://img.shields.io/badge/node->=%206.x.x-blue.svg)](https://nodejs.org/dist/latest-v6.x/docs/api/)
 [![JavaScript Style Guide](https://img.shields.io/badge/code%20style-standard-brightgreen.svg)](http://standardjs.com/)
 
+## Usage
+Use TypeScript for best in class instellisense.
+
+note this package includes
+
+* tap
+* chai
+* chai-as-promised
+* @types/tap
+* @types/chai
+* @types/chai-as-promised
+
+```javascript
+import {tap, expect} from 'tapbundle' // has typings in place
+```
+
 For further information read the linked docs at the top of this README.
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
