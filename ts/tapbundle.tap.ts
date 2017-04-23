@@ -2,6 +2,9 @@ import * as plugins from './tapbundle.plugins'
 
 import { tapCreator } from './tapbundle.tapcreator'
 
+// imported interfaces
+import { HrtMeasurement } from 'early'
+
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess'
 
@@ -12,10 +15,10 @@ export interface ITestFunction {
 
 export class TapTest {
   description: string
+  parallel: boolean
+  hrtMeasurement: HrtMeasurement
   testFunction: ITestFunction
   status: TTestStatus
-  parallel: boolean
-  returnValue
 
   /**
    * constructor
@@ -29,18 +32,22 @@ export class TapTest {
     this.testFunction = optionsArg.testFunction
     this.parallel = optionsArg.parallel
     this.status = 'pending'
+    this.hrtMeasurement = new HrtMeasurement()
   }
 
   /**
    * run the test
    */
   async run (testKeyArg: number) {
+    this.hrtMeasurement.start()
     try {
       await this.testFunction()
-      console.log(`ok ${testKeyArg + 1} - ${this.description} # time=20.040ms`)
+      this.hrtMeasurement.stop()
+      console.log(`ok ${testKeyArg + 1} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`)
       this.status = 'success'
     } catch (err) {
-      console.log(`not ok ${testKeyArg + 1} - ${this.description} # time=20.040ms`)
+      this.hrtMeasurement.stop()
+      console.log(`not ok ${testKeyArg + 1} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`)
       if (this.status === 'success') {
         this.status = 'errorAfterSuccess'
         console.log('!!! ALERT !!!: weird behaviour, since test has been already successfull')

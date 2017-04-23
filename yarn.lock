@@ -23,6 +23,10 @@
   version "0.0.27"
   resolved "https://registry.yarnpkg.com/@types/promises-a-plus/-/promises-a-plus-0.0.27.tgz#c64651134614c84b8f5d7114ce8901d36a609780"
 
+ansi-256-colors@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ansi-256-colors/-/ansi-256-colors-1.1.0.tgz#910de50efcc7c09e3d82f2f87abd6b700c18818a"
+
 assertion-error@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/assertion-error/-/assertion-error-1.0.2.tgz#13ca515d86206da0bac66e834dd397d87581094c"
@@ -30,6 +34,13 @@ assertion-error@^1.0.1:
 balanced-match@^0.4.1:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-0.4.2.tgz#cb3f3e3c732dc0f01ee70b403f302e61d7709838"
+
+beautycolor@^1.0.7:
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/beautycolor/-/beautycolor-1.0.7.tgz#a4715738ac4c8221371e9cbeb5a6cc6d11ecbf7c"
+  dependencies:
+    ansi-256-colors "^1.1.0"
+    typings-global "^1.0.14"
 
 bindings@^1.2.1:
   version "1.2.1"
@@ -73,6 +84,14 @@ deep-eql@^0.1.3:
   resolved "https://registry.yarnpkg.com/deep-eql/-/deep-eql-0.1.3.tgz#ef558acab8de25206cd713906d74e56930eb69f2"
   dependencies:
     type-detect "0.1.1"
+
+early@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/early/-/early-2.1.1.tgz#841e23254ea5dc54d8afaeee82f5ab65c00ee23c"
+  dependencies:
+    beautycolor "^1.0.7"
+    smartq "^1.1.1"
+    typings-global "^1.0.16"
 
 fs.realpath@^1.0.0:
   version "1.0.0"

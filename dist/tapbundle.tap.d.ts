@@ -1,13 +1,14 @@
+import { HrtMeasurement } from 'early';
 export declare type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess';
 export interface ITestFunction {
     (): Promise<any>;
 }
 export declare class TapTest {
     description: string;
+    parallel: boolean;
+    hrtMeasurement: HrtMeasurement;
     testFunction: ITestFunction;
     status: TTestStatus;
-    parallel: boolean;
-    returnValue: any;
     /**
      * constructor
      */
