@@ -3,6 +3,12 @@ import * as plugins from './tapbundle.plugins'
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest'
 
 export class Tap {
+  skip = {
+    test: (...args) => {
+      console.log('skipped')
+    }
+  }
+
   private _tests: TapTest[] = []
 
   /**
@@ -10,7 +16,7 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test (testDescription: string, testFunction: ITestFunction) {
+  async test(testDescription: string, testFunction: ITestFunction) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
@@ -25,7 +31,7 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testParallel (testDescription: string, testFunction: ITestFunction) {
+  testParallel(testDescription: string, testFunction: ITestFunction) {
     this._tests.push(new TapTest({
       description: testDescription,
       testFunction: testFunction,
@@ -38,14 +44,14 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testLeakage (testDescription: string, testFunction: ITestFunction) {
+  testLeakage(testDescription: string, testFunction: ITestFunction) {
 
   }
 
   /**
    * starts the test evaluation
    */
-  async start () {
+  async start() {
     let promiseArray: Promise<any>[] = []
 
     // safeguard against empty test array
@@ -56,7 +62,7 @@ export class Tap {
 
     console.log(`1..${this._tests.length}`)
     for (let testKey = 0; testKey < this._tests.length; testKey++) {
-      let currentTest = this._tests[testKey]
+      let currentTest = this._tests[ testKey ]
       let testPromise = currentTest.run(testKey)
       if (currentTest.parallel) {
         promiseArray.push(testPromise)
@@ -70,7 +76,7 @@ export class Tap {
   /**
    * handle errors
    */
-  threw (err) {
+  threw(err) {
     console.log(err)
   }
 }

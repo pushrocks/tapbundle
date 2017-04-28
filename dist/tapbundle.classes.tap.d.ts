@@ -1,5 +1,8 @@
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
 export declare class Tap {
+    skip: {
+        test: (...args: any[]) => void;
+    };
     private _tests;
     /**
      * Normal test function, will run one by one
