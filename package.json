@@ -21,6 +21,7 @@
     "early": "^2.1.1",
     "leakage": "^0.2.0",
     "smartchai": "^1.0.3",
+    "smartdelay": "^1.0.1",
     "smartq": "^1.1.1",
     "typings-global": "^1.0.16"
   }

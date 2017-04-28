@@ -1,27 +1,4 @@
-import { HrtMeasurement } from 'early';
-export declare type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess';
-export interface ITestFunction {
-    (): Promise<any>;
-}
-export declare class TapTest {
-    description: string;
-    parallel: boolean;
-    hrtMeasurement: HrtMeasurement;
-    testFunction: ITestFunction;
-    status: TTestStatus;
-    /**
-     * constructor
-     */
-    constructor(optionsArg: {
-        description: string;
-        testFunction: ITestFunction;
-        parallel: boolean;
-    });
-    /**
-     * run the test
-     */
-    run(testKeyArg: number): Promise<void>;
-}
+import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
 export declare class Tap {
     private _tests;
     /**
@@ -29,7 +6,7 @@ export declare class Tap {
      * @param testDescription - A description of what the test does
      * @param testFunction - A Function that returns a Promise and resolves or rejects
      */
-    test(testDescription: string, testFunction: ITestFunction): Promise<void>;
+    test(testDescription: string, testFunction: ITestFunction): Promise<TapTest>;
     /**
      * A parallel test that will not be waited for before the next starts.
      * @param testDescription - A description of what the test does
