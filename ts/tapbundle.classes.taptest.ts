@@ -1,8 +1,10 @@
+import * as plugins from './tapbundle.plugins'
 import { tapCreator } from './tapbundle.tapcreator'
 import { TapTools } from './tapbundle.classes.taptools'
 
 // imported interfaces
 import { HrtMeasurement } from 'early'
+import { Deferred } from 'smartq'
 
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout'
@@ -20,6 +22,8 @@ export class TapTest {
   status: TTestStatus
   tapTools: TapTools
   testFunction: ITestFunction
+  testDeferred: Deferred<TapTest> = plugins.smartq.defer()
+  testPromise: Promise<TapTest> = this.testDeferred.promise
   /**
    * constructor
    */
@@ -49,14 +53,20 @@ export class TapTest {
       this.hrtMeasurement.stop()
       console.log(`ok ${testKeyArg + 1} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`)
       this.status = 'success'
+      this.testDeferred.resolve(this)
     } catch (err) {
       this.hrtMeasurement.stop()
       console.log(`not ok ${testKeyArg + 1} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`)
+      this.testDeferred.reject()
+
+      // if the test has already succeeded before
       if (this.status === 'success') {
         this.status = 'errorAfterSuccess'
         console.log('!!! ALERT !!!: weird behaviour, since test has been already successfull')
       }
-      if(this.failureAllowed) {
+
+      // if the test is allowed to fail
+      if (this.failureAllowed) {
         console.log(`please note: failure allowed!`)
       }
       console.log(err)

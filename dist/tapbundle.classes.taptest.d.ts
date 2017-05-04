@@ -1,5 +1,6 @@
 import { TapTools } from './tapbundle.classes.taptools';
 import { HrtMeasurement } from 'early';
+import { Deferred } from 'smartq';
 export declare type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';
 export interface ITestFunction {
     (tapTools?: TapTools): Promise<any>;
@@ -12,6 +13,8 @@ export declare class TapTest {
     status: TTestStatus;
     tapTools: TapTools;
     testFunction: ITestFunction;
+    testDeferred: Deferred<TapTest>;
+    testPromise: Promise<TapTest>;
     /**
      * constructor
      */
