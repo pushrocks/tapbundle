@@ -27,7 +27,7 @@ This package includes
 * npm package chai (through smartchai)
 * npm package chai-as-promised (through smartchai)
 * npm package chai-string (through smartchai)
-* npm pacakge @types/chai (through smartchi)
+* npm package @types/chai (through smartchai)
 * npm package @types/chai-as-promised (through smartchai)
 * npm package @types/chai-string (through smartchai)
 
@@ -48,13 +48,13 @@ tap.test('my awesome description', async (tools) => { // tools are optional para
 
 let myTest2 = tap.test('my awesome test 2', async (tools) => {
   myAwsomeModuleToTest.doSomethingAsync() // we don't wait here
-  await tools.delayFor(3000) // yay. promise based timeouts :)
+  await tools.delayFor(3000) // yay! :) promise based timeouts :)
   console.log('This gets logged 3000 ms into the test')
 })
 
 tap.test('my awesome test 3', async (tools) => {
   expect(true).to.be.true // will not throw
-  await expect(tools.delayFor(2000)).to.eventuall.be.fulfilled // yay expect promises :)
+  await expect(tools.delayFor(2000)).to.eventually.be.fulfilled // yay expect promises :)
   expect((await myTest2.promise).hrtMeasurement.milliSeconds > 1000).to.be.true // access other tests metadata :)
 })
 
