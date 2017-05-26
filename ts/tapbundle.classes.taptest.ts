@@ -57,7 +57,7 @@ export class TapTest {
     } catch (err) {
       this.hrtMeasurement.stop()
       console.log(`not ok ${testKeyArg + 1} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`)
-      this.testDeferred.reject()
+      this.testDeferred.resolve(this)
 
       // if the test has already succeeded before
       if (this.status === 'success') {
