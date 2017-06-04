@@ -15,14 +15,14 @@ export class TapTools {
   /**
    * allow failure
    */
-  allowFailure() {
+  allowFailure () {
     this._tapTest.failureAllowed = true
   }
 
   /**
    * async/await delay method
    */
-  async delayFor(timeMilliArg) {
+  async delayFor (timeMilliArg) {
     await plugins.smartdelay.delayFor(timeMilliArg)
   }
 
