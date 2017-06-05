@@ -27,7 +27,9 @@ export class TapTools {
   }
 
   async timeout (timeMilliArg: number) {
-    await plugins.smartdelay.delayFor(timeMilliArg)
+    let timeout = new plugins.smartdelay.Timeout(timeMilliArg)
+    timeout.makeUnrefed()
+    await timeout.promise
     if (this._tapTest.status === 'pending') {
       this._tapTest.status = 'timeout'
     }
