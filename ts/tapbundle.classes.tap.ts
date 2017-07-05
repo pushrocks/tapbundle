@@ -1,7 +1,7 @@
 import * as plugins from './tapbundle.plugins'
 
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest'
-
+import { TapWrap } from './tapbundle.classes.tapwrap'
 export class Tap {
   skip = {
     test: (...args) => {
