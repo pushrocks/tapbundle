@@ -8,7 +8,7 @@ export class TapTools {
    */
   private _tapTest: TapTest
 
-  constructor(TapTestArg) {
+  constructor (TapTestArg) {
     this._tapTest = TapTestArg
   }
 

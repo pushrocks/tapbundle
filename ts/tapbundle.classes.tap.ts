@@ -1,11 +1,15 @@
 import * as plugins from './tapbundle.plugins'
 
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest'
-import { TapWrap } from './tapbundle.classes.tapwrap'
+import { TapWrap, ITapWrapFunction } from './tapbundle.classes.tapwrap'
 export class Tap {
+
+  /**
+   * skip a test
+   */
   skip = {
-    test: (...args) => {
-      console.log('skipped')
+    test: (descriptionArg: string, functionArg: ITestFunction) => {
+      console.log(`skipped test: ${descriptionArg}`)
     }
   }
 
@@ -16,7 +20,7 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test(testDescription: string, testFunction: ITestFunction) {
+  async test (testDescription: string, testFunction: ITestFunction) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
@@ -27,11 +31,18 @@ export class Tap {
   }
 
   /**
+   * wraps function
+   */
+  wrap (functionArg: ITapWrapFunction) {
+    return new TapWrap(functionArg)
+  }
+
+  /**
    * A parallel test that will not be waited for before the next starts.
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testParallel(testDescription: string, testFunction: ITestFunction) {
+  testParallel (testDescription: string, testFunction: ITestFunction) {
     this._tests.push(new TapTest({
       description: testDescription,
       testFunction: testFunction,
@@ -44,14 +55,14 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testLeakage(testDescription: string, testFunction: ITestFunction) {
+  testLeakage (testDescription: string, testFunction: ITestFunction) {
 
   }
 
   /**
    * starts the test evaluation
    */
-  async start() {
+  async start () {
     let promiseArray: Promise<any>[] = []
 
     // safeguard against empty test array
@@ -76,7 +87,7 @@ export class Tap {
   /**
    * handle errors
    */
-  threw(err) {
+  threw (err) {
     console.log(err)
   }
 }

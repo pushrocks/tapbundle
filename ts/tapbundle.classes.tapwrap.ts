@@ -5,10 +5,20 @@ export interface ITapWrapFunction {
 }
 
 export class TapWrap {
-  asyncFunction: ITapWrapFunction
-  constructor(functionArg: ITapWrapFunction) {
+  wrapFunction: ITapWrapFunction
+
+  /**
+   * the constructor
+   */
+  constructor (wrapFunctionArg: ITapWrapFunction) {
     // nothing here
-    
-  
+    this.wrapFunction = wrapFunctionArg
+  }
+
+  /**
+   * run the wrapFunction
+   */
+  async run () {
+    await this.wrapFunction()
   }
 }
