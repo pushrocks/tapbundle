@@ -7,7 +7,7 @@ export declare class Tap {
     skip: {
         test: (descriptionArg: string, functionArg: ITestFunction) => void;
     };
-    private _tests;
+    private _tapTests;
     /**
      * Normal test function, will run one by one
      * @param testDescription - A description of what the test does
@@ -33,7 +33,9 @@ export declare class Tap {
     /**
      * starts the test evaluation
      */
-    start(): Promise<void>;
+    start(optionsArg?: {
+        throwOnError: boolean;
+    }): Promise<void>;
     /**
      * handle errors
      */

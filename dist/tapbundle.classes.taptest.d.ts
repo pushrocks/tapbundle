@@ -13,6 +13,7 @@ export declare class TapTest {
     status: TTestStatus;
     tapTools: TapTools;
     testFunction: ITestFunction;
+    testKey: number;
     testDeferred: Deferred<TapTest>;
     testPromise: Promise<TapTest>;
     /**

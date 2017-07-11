@@ -13,27 +13,27 @@ export class Tap {
     }
   }
 
-  private _tests: TapTest[] = []
+  private _tapTests: TapTest[] = []
 
   /**
    * Normal test function, will run one by one
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test (testDescription: string, testFunction: ITestFunction) {
+  async test(testDescription: string, testFunction: ITestFunction) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: false
     })
-    this._tests.push(localTest)
+    this._tapTests.push(localTest)
     return localTest
   }
 
   /**
    * wraps function
    */
-  wrap (functionArg: ITapWrapFunction) {
+  wrap(functionArg: ITapWrapFunction) {
     return new TapWrap(functionArg)
   }
 
@@ -42,8 +42,8 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testParallel (testDescription: string, testFunction: ITestFunction) {
-    this._tests.push(new TapTest({
+  testParallel(testDescription: string, testFunction: ITestFunction) {
+    this._tapTests.push(new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: true
@@ -55,25 +55,27 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testLeakage (testDescription: string, testFunction: ITestFunction) {
+  testLeakage(testDescription: string, testFunction: ITestFunction) {
 
   }
 
   /**
    * starts the test evaluation
    */
-  async start () {
+  async start(optionsArg?: {
+    throwOnError: boolean
+  }) {
     let promiseArray: Promise<any>[] = []
 
     // safeguard against empty test array
-    if (this._tests.length === 0) {
+    if (this._tapTests.length === 0) {
       console.log('no tests specified. Ending here!')
       return
     }
 
-    console.log(`1..${this._tests.length}`)
-    for (let testKey = 0; testKey < this._tests.length; testKey++) {
-      let currentTest = this._tests[ testKey ]
+    console.log(`1..${this._tapTests.length}`)
+    for (let testKey = 0; testKey < this._tapTests.length; testKey++) {
+      let currentTest = this._tapTests[testKey]
       let testPromise = currentTest.run(testKey)
       if (currentTest.parallel) {
         promiseArray.push(testPromise)
@@ -82,6 +84,29 @@ export class Tap {
       }
     }
     await Promise.all(promiseArray)
+
+    // when tests have been run and all promises are fullfilled
+    let failReasons: string[] = []
+    let executionNotes: string[] = []
+    // collect failed tests
+    for (let tapTest of this._tapTests) {
+      if (tapTest.status !== 'success') {
+        failReasons.push(
+          `Test ${tapTest.testKey + 1} failed with status ${tapTest.status}:\n`
+          + `|| ${tapTest.description}\n`
+          + `|| for more information please take a look the logs above`
+        )
+      }
+    }
+
+    // render fail Reasons
+    for (let failReason of failReasons) {
+      console.log(failReason)
+    }
+
+    if (optionsArg && optionsArg.throwOnError && failReasons.length > 0) {
+      process.exit(1)
+    }
   }
 
   /**
