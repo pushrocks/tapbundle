@@ -1,4 +1,4 @@
-import { tap, expect } from '../dist/index'
+import { tap, expect } from '../ts/index'
 
 let test1 = tap.test('my first test -> expect true to be true', async () => {
   return expect(true).to.be.true
