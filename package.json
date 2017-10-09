@@ -21,7 +21,7 @@
     "@types/node": "^8.0.33",
     "early": "^2.1.1",
     "leakage": "^0.3.0",
-    "smartchai": "^1.0.3",
+    "smartchai": "^1.0.8",
     "smartdelay": "^1.0.4",
     "smartq": "^1.1.6",
     "typings-global": "^1.0.20"
