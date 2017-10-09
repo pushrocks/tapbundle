@@ -18,6 +18,7 @@
   },
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
+    "@types/node": "^8.0.33",
     "early": "^2.1.1",
     "leakage": "^0.3.0",
     "smartchai": "^1.0.3",
