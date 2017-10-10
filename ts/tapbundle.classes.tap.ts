@@ -20,7 +20,7 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test(testDescription: string, testFunction: ITestFunction) {
+  async test (testDescription: string, testFunction: ITestFunction) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
@@ -33,7 +33,7 @@ export class Tap {
   /**
    * wraps function
    */
-  wrap(functionArg: ITapWrapFunction) {
+  wrap (functionArg: ITapWrapFunction) {
     return new TapWrap(functionArg)
   }
 
@@ -42,21 +42,12 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testParallel(testDescription: string, testFunction: ITestFunction) {
+  testParallel (testDescription: string, testFunction: ITestFunction) {
     this._tapTests.push(new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: true
     }))
-  }
-
-  /**
-   * tests leakage
-   * @param testDescription - A description of what the test does
-   * @param testFunction - A Function that returns a Promise and resolves or rejects
-   */
-  testLeakage(testDescription: string, testFunction: ITestFunction) {
-
   }
 
   /**

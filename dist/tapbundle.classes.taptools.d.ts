@@ -1,3 +1,6 @@
+export interface IPromiseFunc {
+    (): Promise<any>;
+}
 export declare class TapTools {
     /**
      * the referenced TapTest
@@ -12,5 +15,8 @@ export declare class TapTools {
      * async/await delay method
      */
     delayFor(timeMilliArg: any): Promise<void>;
+    delayForRandom(timeMilliMinArg: any, timeMilliMaxArg: any): Promise<void>;
     timeout(timeMilliArg: number): Promise<void>;
+    checkIterationLeak(iterationfuncArg: IPromiseFunc): Promise<void>;
+    returnError(throwingFuncArg: IPromiseFunc): Promise<Error>;
 }

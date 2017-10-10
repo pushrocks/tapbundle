@@ -25,12 +25,6 @@ export declare class Tap {
      */
     testParallel(testDescription: string, testFunction: ITestFunction): void;
     /**
-     * tests leakage
-     * @param testDescription - A description of what the test does
-     * @param testFunction - A Function that returns a Promise and resolves or rejects
-     */
-    testLeakage(testDescription: string, testFunction: ITestFunction): void;
-    /**
      * starts the test evaluation
      */
     start(optionsArg?: {
