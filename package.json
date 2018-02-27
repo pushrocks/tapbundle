@@ -18,15 +18,14 @@
   },
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
-    "@types/node": "^8.0.33",
     "early": "^2.1.1",
     "leakage": "^0.3.0",
-    "smartchai": "^1.0.3",
+    "smartchai": "^2.0.0",
     "smartdelay": "^1.0.3",
-    "smartq": "^1.1.1",
-    "typings-global": "^1.0.19"
+    "smartq": "^1.1.1"
   },
   "devDependencies": {
+    "@types/node": "^9.4.6",
     "randomstring": "^1.1.5"
   }
 }

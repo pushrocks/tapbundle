@@ -15,7 +15,7 @@ let test2 = tap.test('should throw', async (tools) => {
       outsideArray.push(randomstring.generate(1000))
     })
   })
-  expect(err).to.be.an.error()
+  expect(err).to.be.instanceof(Error)
 })
 
 tap.start()
