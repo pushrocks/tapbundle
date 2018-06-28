@@ -1,11 +1,13 @@
 {
   "name": "tapbundle",
+  "private": false,
   "version": "2.0.0",
   "description": "tap bundled for tapbuffer",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
-    "test": "(npmts)"
+    "test": "(tsrun test/test.ts)",
+    "build": "(npmts)"
   },
   "repository": {
     "type": "git",
@@ -19,13 +21,14 @@
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
     "early": "^2.1.1",
-    "leakage": "^0.3.0",
-    "smartchai": "^2.0.0",
-    "smartdelay": "^1.0.3",
-    "smartq": "^1.1.1"
+    "leakage": "^0.4.0",
+    "smartchai": "^2.0.1",
+    "smartdelay": "^1.0.4",
+    "smartq": "^1.1.8"
   },
   "devDependencies": {
-    "@types/node": "^9.4.6",
+    "@gitzone/tsrun": "^1.0.7",
+    "@types/node": "^10.5.0",
     "randomstring": "^1.1.5"
   }
 }

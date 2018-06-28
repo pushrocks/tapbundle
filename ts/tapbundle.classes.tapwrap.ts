@@ -1,24 +1,24 @@
-import * as plugins from './tapbundle.plugins'
+import * as plugins from './tapbundle.plugins';
 
 export interface ITapWrapFunction {
-  (): Promise<any>
+  (): Promise<any>;
 }
 
 export class TapWrap {
-  wrapFunction: ITapWrapFunction
+  wrapFunction: ITapWrapFunction;
 
   /**
    * the constructor
    */
-  constructor (wrapFunctionArg: ITapWrapFunction) {
+  constructor(wrapFunctionArg: ITapWrapFunction) {
     // nothing here
-    this.wrapFunction = wrapFunctionArg
+    this.wrapFunction = wrapFunctionArg;
   }
 
   /**
    * run the wrapFunction
    */
-  async run () {
-    await this.wrapFunction()
+  async run() {
+    await this.wrapFunction();
   }
 }
