@@ -22,7 +22,7 @@ export class TapTest {
   tapTools: TapTools;
   testFunction: ITestFunction;
   testKey: number; // the testKey the position in the test qeue. Set upon calling .run()
-  testDeferred: Deferred<TapTest> = plugins.smartq.defer();
+  testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
   testPromise: Promise<TapTest> = this.testDeferred.promise;
   /**
    * constructor
