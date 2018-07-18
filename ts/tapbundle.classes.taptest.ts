@@ -3,7 +3,7 @@ import { tapCreator } from './tapbundle.tapcreator';
 import { TapTools } from './tapbundle.classes.taptools';
 
 // imported interfaces
-import { HrtMeasurement } from 'early';
+import { HrtMeasurement } from '@pushrocks/early';
 import { Deferred } from 'smartq';
 
 // interfaces
