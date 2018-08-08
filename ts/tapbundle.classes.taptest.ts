@@ -4,7 +4,7 @@ import { TapTools } from './tapbundle.classes.taptools';
 
 // imported interfaces
 import { HrtMeasurement } from '@pushrocks/early';
-import { Deferred } from 'smartq';
+import { Deferred } from '@pushrocks/smartpromise';
 
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';

@@ -20,15 +20,15 @@
   },
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
-    "@gitzone/tsbuild": "^2.0.22",
-    "@gitzone/tstest": "^1.0.13",
     "@pushrocks/early": "^3.0.3",
-    "@pushrocks/smartdelay": "^2.0.1",
+    "@pushrocks/smartdelay": "^2.0.2",
     "@pushrocks/smartpromise": "^2.0.5",
     "leakage": "^0.4.0",
     "smartchai": "^2.0.1"
   },
   "devDependencies": {
+    "@gitzone/tsbuild": "^2.0.22",
+    "@gitzone/tstest": "^1.0.13",
     "@gitzone/tsrun": "^1.1.12",
     "@types/node": "^10.5.7",
     "randomstring": "^1.1.5"
