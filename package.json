@@ -7,7 +7,7 @@
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(tstest test/)",
-    "build": "(npmts)"
+    "build": "(tsbuild)"
   },
   "repository": {
     "type": "git",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
+    "@gitzone/tsbuild": "^2.0.22",
     "@gitzone/tstest": "^1.0.13",
     "@pushrocks/early": "^3.0.3",
     "@pushrocks/smartdelay": "^2.0.1",
