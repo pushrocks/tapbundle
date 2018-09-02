@@ -4,28 +4,46 @@ import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
 import { TapWrap, ITapWrapFunction } from './tapbundle.classes.tapwrap';
 export class Tap {
   /**
-   * skip a test
+   * skips a test
+   * tests marked with tap.skip.test() are never executed
    */
   skip = {
     test: (descriptionArg: string, functionArg: ITestFunction) => {
       console.log(`skipped test: ${descriptionArg}`);
+    },
+    testParallel: (descriptionArg: string, functionArg: ITestFunction) => {
+      console.log(`skipped test: ${descriptionArg}`);
     }
   };
 
+  /**
+   * only executes tests marked as ONLY
+   */
+  only = {
+    test: (descriptionArg: string, testFunctionArg: ITestFunction) => {
+      this.test(descriptionArg, testFunctionArg, 'only');
+    }
+  }
+
   private _tapTests: TapTest[] = [];
+  private _tapTestsOnly: TapTest[] = [];
 
   /**
    * Normal test function, will run one by one
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test(testDescription: string, testFunction: ITestFunction) {
+  async test(testDescription: string, testFunction: ITestFunction, modeArg: 'normal' | 'only' | 'skip' = 'normal' ) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: false
     });
-    this._tapTests.push(localTest);
+    if(modeArg === 'normal') {
+      this._tapTests.push(localTest);
+    } else if (modeArg === 'only') {
+      this._tapTestsOnly.push(localTest);
+    }
     return localTest;
   }
 
@@ -63,9 +81,17 @@ export class Tap {
       return;
     }
 
-    console.log(`1..${this._tapTests.length}`);
-    for (let testKey = 0; testKey < this._tapTests.length; testKey++) {
-      let currentTest = this._tapTests[testKey];
+    // determine which tests to run
+    let concerningTests: TapTest[];
+    if(this._tapTestsOnly.length > 0) {
+      concerningTests = this._tapTestsOnly;
+    } else {
+      concerningTests = this._tapTests;
+    }
+
+    console.log(`1..${concerningTests.length}`);
+    for (let testKey = 0; testKey < concerningTests.length; testKey++) {
+      let currentTest = concerningTests[testKey];
       let testPromise = currentTest.run(testKey);
       if (currentTest.parallel) {
         promiseArray.push(testPromise);
@@ -79,7 +105,7 @@ export class Tap {
     let failReasons: string[] = [];
     let executionNotes: string[] = [];
     // collect failed tests
-    for (let tapTest of this._tapTests) {
+    for (let tapTest of concerningTests) {
       if (tapTest.status !== 'success') {
         failReasons.push(
           `Test ${tapTest.testKey + 1} failed with status ${tapTest.status}:\n` +
