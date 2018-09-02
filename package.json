@@ -28,9 +28,9 @@
   },
   "devDependencies": {
     "@gitzone/tsbuild": "^2.0.22",
-    "@gitzone/tstest": "^1.0.13",
     "@gitzone/tsrun": "^1.1.12",
-    "@types/node": "^10.5.7",
+    "@gitzone/tstest": "^1.0.15",
+    "@types/node": "^10.9.4",
     "randomstring": "^1.1.5"
   }
 }
