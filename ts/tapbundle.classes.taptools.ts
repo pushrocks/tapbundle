@@ -18,23 +18,23 @@ export class TapTools {
   /**
    * allow failure
    */
-  allowFailure() {
+  public allowFailure() {
     this._tapTest.failureAllowed = true;
   }
 
   /**
    * async/await delay method
    */
-  async delayFor(timeMilliArg) {
+  public async delayFor(timeMilliArg) {
     await plugins.smartdelay.delayFor(timeMilliArg);
   }
 
-  async delayForRandom(timeMilliMinArg, timeMilliMaxArg) {
+  public async delayForRandom(timeMilliMinArg, timeMilliMaxArg) {
     await plugins.smartdelay.delayForRandom(timeMilliMinArg, timeMilliMaxArg);
   }
 
-  async timeout(timeMilliArg: number) {
-    let timeout = new plugins.smartdelay.Timeout(timeMilliArg);
+  public async timeout(timeMilliArg: number) {
+    const timeout = new plugins.smartdelay.Timeout(timeMilliArg);
     timeout.makeUnrefed();
     await timeout.promise;
     if (this._tapTest.status === 'pending') {
@@ -42,11 +42,15 @@ export class TapTools {
     }
   }
 
-  async checkIterationLeak(iterationfuncArg: IPromiseFunc) {
+  public async checkIterationLeak(iterationfuncArg: IPromiseFunc) {
+  if (process.version.startsWith('v11')) {
+    console.log('iteration leakage checks disabled for now on version 11 due to low performance');
+  } else {
     await plugins.leakage.iterate.async(iterationfuncArg);
   }
+  }
 
-  async returnError(throwingFuncArg: IPromiseFunc) {
+  public async returnError(throwingFuncArg: IPromiseFunc) {
     let funcErr: Error;
     try {
       await throwingFuncArg();
@@ -54,5 +58,9 @@ export class TapTools {
       funcErr = err;
     }
     return funcErr;
+  }
+
+  public defer () {
+    return plugins.smartpromise.defer();
   }
 }

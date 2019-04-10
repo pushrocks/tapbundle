@@ -7,5 +7,15 @@
     "testConfig": {
       "parallel": false
     }
+  },
+  "gitzone": {
+    "module": {
+      "githost": "gitlab.com",
+      "gitscope": "pushrocks",
+      "gitrepo": "tapbundle",
+      "shortDescription": "tap bundled for tapbuffer",
+      "npmPackagename": "@pushrocks/tapbundle",
+      "license": "MIT"
+    }
   }
 }

@@ -23,7 +23,7 @@ export class Tap {
     test: (descriptionArg: string, testFunctionArg: ITestFunction) => {
       this.test(descriptionArg, testFunctionArg, 'only');
     }
-  }
+  };
 
   private _tapTests: TapTest[] = [];
   private _tapTestsOnly: TapTest[] = [];
@@ -33,13 +33,17 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test(testDescription: string, testFunction: ITestFunction, modeArg: 'normal' | 'only' | 'skip' = 'normal' ) {
+  async test(
+    testDescription: string,
+    testFunction: ITestFunction,
+    modeArg: 'normal' | 'only' | 'skip' = 'normal'
+  ) {
     let localTest = new TapTest({
       description: testDescription,
       testFunction: testFunction,
       parallel: false
     });
-    if(modeArg === 'normal') {
+    if (modeArg === 'normal') {
       this._tapTests.push(localTest);
     } else if (modeArg === 'only') {
       this._tapTestsOnly.push(localTest);
@@ -83,7 +87,7 @@ export class Tap {
 
     // determine which tests to run
     let concerningTests: TapTest[];
-    if(this._tapTestsOnly.length > 0) {
+    if (this._tapTestsOnly.length > 0) {
       concerningTests = this._tapTestsOnly;
     } else {
       concerningTests = this._tapTests;
