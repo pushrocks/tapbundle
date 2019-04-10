@@ -43,11 +43,11 @@ export class TapTools {
   }
 
   public async checkIterationLeak(iterationfuncArg: IPromiseFunc) {
-  if (process.version.startsWith('v11')) {
-    console.log('iteration leakage checks disabled for now on version 11 due to low performance');
-  } else {
-    await plugins.leakage.iterate.async(iterationfuncArg);
-  }
+    if (process.version.startsWith('v11')) {
+      console.log('iteration leakage checks disabled for now on version 11 due to low performance');
+    } else {
+      await plugins.leakage.iterate.async(iterationfuncArg);
+    }
   }
 
   public async returnError(throwingFuncArg: IPromiseFunc) {
@@ -60,7 +60,7 @@ export class TapTools {
     return funcErr;
   }
 
-  public defer () {
+  public defer() {
     return plugins.smartpromise.defer();
   }
 }
