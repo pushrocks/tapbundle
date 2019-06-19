@@ -49,18 +49,6 @@ testLTS:
   tags:
   - docker
   - notpriv
-    
-testSTABLE:
-  stage: test
-  script:
-  - npmci npm prepare
-  - npmci node install stable
-  - npmci npm install
-  - npmci npm test
-  coverage: /\d+.?\d+?\%\s*coverage/
-  tags:
-  - docker
-  - notpriv
 
 release:
   stage: release
