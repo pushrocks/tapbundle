@@ -34,5 +34,15 @@
     "randomstring": "^1.1.5",
     "tslint": "^5.17.0",
     "tslint-config-prettier": "^1.18.0"
-  }
+  },
+  "files": [
+    "ts/*",
+    "ts_web/*",
+    "dist/*",
+    "dist_web/*",
+    "assets/*",
+    "cli.js",
+    "npmextra.json",
+    "readme.md"
+  ]
 }

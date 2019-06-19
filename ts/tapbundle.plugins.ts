@@ -8,7 +8,4 @@ export { early, smartdelay, smartpromise };
 // third party
 import * as leakage from 'leakage';
 
-export {
-  leakage
-};
-
+export { leakage };
