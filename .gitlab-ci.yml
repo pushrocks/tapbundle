@@ -1,5 +1,7 @@
 # gitzone ci_default
 image: registry.gitlab.com/hosttoday/ht-docker-node:npmci
+variables:
+  GIT_STRATEGY: clone
 
 cache:
   paths:
@@ -48,6 +50,18 @@ testLTS:
   coverage: /\d+.?\d+?\%\s*coverage/
   tags:
   - docker
+  - priv
+
+testBuild:
+  stage: test
+  script:
+  - npmci npm prepare
+  - npmci node install lts
+  - npmci npm install
+  - npmci command npm run build
+  coverage: /\d+.?\d+?\%\s*coverage/
+  tags:
+  - docker
   - notpriv
 
 release:
@@ -86,7 +100,9 @@ trigger:
   - notpriv
 
 pages:
-  image: hosttoday/ht-docker-node:npmci
+  image: hosttoday/ht-docker-dbase:npmci
+  services:
+   - docker:18-dind
   stage: metadata
   script:
     - npmci command npm install -g @gitzone/tsdoc
