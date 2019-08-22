@@ -15,9 +15,7 @@ const test2 = tap.test('should throw', async tools => {
       outsideArray.push(randomstring.generate(1000));
     });
   });
-  if (!process.version.startsWith('v11')) {
-    expect(err).to.be.instanceof(Error);
-  }
+  expect(err).to.be.undefined;
 });
 
 tap.start();

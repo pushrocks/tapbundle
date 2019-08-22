@@ -43,11 +43,7 @@ export class TapTools {
   }
 
   public async checkIterationLeak(iterationfuncArg: IPromiseFunc) {
-    if (process.version.startsWith('v11')) {
-      console.log('iteration leakage checks disabled for now on version 11 due to low performance');
-    } else {
-      await plugins.leakage.iterate.async(iterationfuncArg);
-    }
+    console.log('iteration leakage checks disabled for now due to incompatibilities with node v12');
   }
 
   public async returnError(throwingFuncArg: IPromiseFunc) {

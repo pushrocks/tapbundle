@@ -6,6 +6,6 @@ import * as smartpromise from '@pushrocks/smartpromise';
 export { early, smartdelay, smartpromise };
 
 // third party
-import * as leakage from 'leakage';
+/* import * as leakage from 'leakage';
 
-export { leakage };
+export { leakage }; */
