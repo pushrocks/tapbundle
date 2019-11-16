@@ -9,21 +9,19 @@ import { Deferred } from '@pushrocks/smartpromise';
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';
 
-export interface ITestFunction {
-  (tapTools?: TapTools): Promise<any>;
-}
+export type ITestFunction = (tapTools?: TapTools) => Promise<any>;
 
 export class TapTest {
-  description: string;
-  failureAllowed: boolean;
-  hrtMeasurement: HrtMeasurement;
-  parallel: boolean;
-  status: TTestStatus;
-  tapTools: TapTools;
-  testFunction: ITestFunction;
-  testKey: number; // the testKey the position in the test qeue. Set upon calling .run()
-  testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
-  testPromise: Promise<TapTest> = this.testDeferred.promise;
+  public description: string;
+  public failureAllowed: boolean;
+  public hrtMeasurement: HrtMeasurement;
+  public parallel: boolean;
+  public status: TTestStatus;
+  public tapTools: TapTools;
+  public testFunction: ITestFunction;
+  public testKey: number; // the testKey the position in the test qeue. Set upon calling .run()
+  public testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
+  public testPromise: Promise<TapTest> = this.testDeferred.promise;
   /**
    * constructor
    */
@@ -39,10 +37,10 @@ export class TapTest {
   /**
    * run the test
    */
-  async run(testKeyArg: number) {
+  public async run(testKeyArg: number) {
     this.hrtMeasurement.start();
     this.testKey = testKeyArg;
-    let testNumber = testKeyArg + 1;
+    const testNumber = testKeyArg + 1;
     try {
       await this.testFunction(this.tapTools);
       if (this.status === 'timeout') {

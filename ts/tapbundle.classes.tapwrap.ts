@@ -19,6 +19,7 @@ export class TapWrap {
    * run the wrapFunction
    */
   async run() {
+    // TODO: make sure it makes sense what we do here.
     await this.wrapFunction();
   }
 }

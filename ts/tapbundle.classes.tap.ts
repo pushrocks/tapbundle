@@ -1,5 +1,6 @@
 import * as plugins from './tapbundle.plugins';
 
+import { IPreTaskFunction, PreTask } from './tapbundle.classes.pretask';
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
 import { TapWrap, ITapWrapFunction } from './tapbundle.classes.tapwrap';
 export class Tap {
@@ -25,6 +26,7 @@ export class Tap {
     }
   };
 
+  private _tapPreTasks: PreTask[] = [];
   private _tapTests: TapTest[] = [];
   private _tapTestsOnly: TapTest[] = [];
 
@@ -49,6 +51,10 @@ export class Tap {
       this._tapTestsOnly.push(localTest);
     }
     return localTest;
+  }
+
+  public preTask (functionArg: IPreTaskFunction) {
+    this._tapPreTasks.push(new PreTask(functionArg));
   }
 
   /**
@@ -82,6 +88,7 @@ export class Tap {
     // safeguard against empty test array
     if (this._tapTests.length === 0) {
       console.log('no tests specified. Ending here!');
+      // TODO: throw proper error
       return;
     }
 
@@ -91,6 +98,11 @@ export class Tap {
       concerningTests = this._tapTestsOnly;
     } else {
       concerningTests = this._tapTests;
+    }
+
+    // lets run the pretasks
+    for (const preTask of this._tapPreTasks) {
+      await preTask.run();
     }
 
     console.log(`1..${concerningTests.length}`);
