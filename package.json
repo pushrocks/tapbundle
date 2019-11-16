@@ -22,6 +22,7 @@
   "dependencies": {
     "@pushrocks/early": "^3.0.3",
     "@pushrocks/smartdelay": "^2.0.3",
+    "@pushrocks/smartfile": "^7.0.6",
     "@pushrocks/smartpromise": "^3.0.2",
     "smartchai": "^2.0.1"
   },

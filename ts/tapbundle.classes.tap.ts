@@ -7,7 +7,7 @@ export class Tap {
    * skips a test
    * tests marked with tap.skip.test() are never executed
    */
-  skip = {
+  public skip = {
     test: (descriptionArg: string, functionArg: ITestFunction) => {
       console.log(`skipped test: ${descriptionArg}`);
     },
@@ -19,7 +19,7 @@ export class Tap {
   /**
    * only executes tests marked as ONLY
    */
-  only = {
+  public only = {
     test: (descriptionArg: string, testFunctionArg: ITestFunction) => {
       this.test(descriptionArg, testFunctionArg, 'only');
     }
@@ -33,14 +33,14 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  async test(
+  public async test(
     testDescription: string,
     testFunction: ITestFunction,
     modeArg: 'normal' | 'only' | 'skip' = 'normal'
   ) {
-    let localTest = new TapTest({
+    const localTest = new TapTest({
       description: testDescription,
-      testFunction: testFunction,
+      testFunction,
       parallel: false
     });
     if (modeArg === 'normal') {
@@ -54,7 +54,7 @@ export class Tap {
   /**
    * wraps function
    */
-  wrap(functionArg: ITapWrapFunction) {
+  public wrap(functionArg: ITapWrapFunction) {
     return new TapWrap(functionArg);
   }
 
@@ -63,11 +63,11 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  testParallel(testDescription: string, testFunction: ITestFunction) {
+  public testParallel(testDescription: string, testFunction: ITestFunction) {
     this._tapTests.push(
       new TapTest({
         description: testDescription,
-        testFunction: testFunction,
+        testFunction,
         parallel: true
       })
     );
@@ -76,8 +76,8 @@ export class Tap {
   /**
    * starts the test evaluation
    */
-  async start(optionsArg?: { throwOnError: boolean }) {
-    let promiseArray: Promise<any>[] = [];
+  public async start(optionsArg?: { throwOnError: boolean }) {
+    const promiseArray: Array<Promise<any>> = [];
 
     // safeguard against empty test array
     if (this._tapTests.length === 0) {
@@ -95,8 +95,8 @@ export class Tap {
 
     console.log(`1..${concerningTests.length}`);
     for (let testKey = 0; testKey < concerningTests.length; testKey++) {
-      let currentTest = concerningTests[testKey];
-      let testPromise = currentTest.run(testKey);
+      const currentTest = concerningTests[testKey];
+      const testPromise = currentTest.run(testKey);
       if (currentTest.parallel) {
         promiseArray.push(testPromise);
       } else {
@@ -106,10 +106,10 @@ export class Tap {
     await Promise.all(promiseArray);
 
     // when tests have been run and all promises are fullfilled
-    let failReasons: string[] = [];
-    let executionNotes: string[] = [];
+    const failReasons: string[] = [];
+    const executionNotes: string[] = [];
     // collect failed tests
-    for (let tapTest of concerningTests) {
+    for (const tapTest of concerningTests) {
       if (tapTest.status !== 'success') {
         failReasons.push(
           `Test ${tapTest.testKey + 1} failed with status ${tapTest.status}:\n` +
@@ -120,7 +120,7 @@ export class Tap {
     }
 
     // render fail Reasons
-    for (let failReason of failReasons) {
+    for (const failReason of failReasons) {
       console.log(failReason);
     }
 
@@ -132,7 +132,7 @@ export class Tap {
   /**
    * handle errors
    */
-  threw(err) {
+  public threw(err) {
     console.log(err);
   }
 }

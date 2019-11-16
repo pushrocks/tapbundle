@@ -42,6 +42,10 @@ export class TapTools {
     }
   }
 
+  public async ensureDir(pathArg: string) {
+    await plugins.smartfile.fs.ensureDir(pathArg);
+  }
+
   public async checkIterationLeak(iterationfuncArg: IPromiseFunc) {
     console.log('iteration leakage checks disabled for now due to incompatibilities with node v12');
   }
