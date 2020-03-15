@@ -1,5 +1,9 @@
 import { tap, expect } from '../ts/index';
 
+tap.preTask('hi there', async () => {
+  console.log('this is a pretask');
+})
+
 const test1 = tap.test('my first test -> expect true to be true', async () => {
   return expect(true).to.be.true;
 });

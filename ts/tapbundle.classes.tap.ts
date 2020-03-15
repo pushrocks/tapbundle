@@ -53,8 +53,8 @@ export class Tap {
     return localTest;
   }
 
-  public preTask (functionArg: IPreTaskFunction) {
-    this._tapPreTasks.push(new PreTask(functionArg));
+  public preTask (descriptionArg: string, functionArg: IPreTaskFunction) {
+    this._tapPreTasks.push(new PreTask(descriptionArg, functionArg));
   }
 
   /**

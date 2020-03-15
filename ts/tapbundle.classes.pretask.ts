@@ -7,13 +7,16 @@ export interface IPreTaskFunction {
 }
 
 export class PreTask {
+  public description: string;
   public preTaskFunction: IPreTaskFunction;
 
-  constructor(preTaskFunctionArg: IPreTaskFunction) {
+  constructor(descriptionArg: string, preTaskFunctionArg: IPreTaskFunction) {
+    this.description = descriptionArg;
     this.preTaskFunction = preTaskFunctionArg;
   }
 
   public async run () {
+    console.log(`::__PRETASK: ${this.description}`);
     await this.preTaskFunction(new TapTools(null));
   }
 }
