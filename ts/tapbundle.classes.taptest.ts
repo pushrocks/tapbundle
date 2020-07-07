@@ -3,8 +3,8 @@ import { tapCreator } from './tapbundle.tapcreator';
 import { TapTools } from './tapbundle.classes.taptools';
 
 // imported interfaces
-import { HrtMeasurement } from '@pushrocks/early';
 import { Deferred } from '@pushrocks/smartpromise';
+import { HrtMeasurement } from '@pushrocks/smarttime';
 
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';
@@ -42,6 +42,7 @@ export class TapTest {
     this.testKey = testKeyArg;
     const testNumber = testKeyArg + 1;
     try {
+      
       await this.testFunction(this.tapTools);
       if (this.status === 'timeout') {
         throw new Error('Test succeeded, but timed out...');
