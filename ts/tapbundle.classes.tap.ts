@@ -144,7 +144,10 @@ export class Tap {
     }
 
     if (optionsArg && optionsArg.throwOnError && failReasons.length > 0) {
-      process.exit(1);
+      if (!smartenvInstance.isBrowser) process.exit(1);
+    }
+    if (smartenvInstance.isBrowser) {
+      globalThis.tapbundleDeferred.resolve();
     }
   }
 
