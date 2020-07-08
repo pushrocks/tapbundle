@@ -14,7 +14,7 @@ export class Tap {
     },
     testParallel: (descriptionArg: string, functionArg: ITestFunction) => {
       console.log(`skipped test: ${descriptionArg}`);
-    }
+    },
   };
 
   /**
@@ -23,7 +23,7 @@ export class Tap {
   public only = {
     test: (descriptionArg: string, testFunctionArg: ITestFunction) => {
       this.test(descriptionArg, testFunctionArg, 'only');
-    }
+    },
   };
 
   private _tapPreTasks: PreTask[] = [];
@@ -43,7 +43,7 @@ export class Tap {
     const localTest = new TapTest({
       description: testDescription,
       testFunction,
-      parallel: false
+      parallel: false,
     });
     if (modeArg === 'normal') {
       this._tapTests.push(localTest);
@@ -53,7 +53,7 @@ export class Tap {
     return localTest;
   }
 
-  public preTask (descriptionArg: string, functionArg: IPreTaskFunction) {
+  public preTask(descriptionArg: string, functionArg: IPreTaskFunction) {
     this._tapPreTasks.push(new PreTask(descriptionArg, functionArg));
   }
 
@@ -74,7 +74,7 @@ export class Tap {
       new TapTest({
         description: testDescription,
         testFunction,
-        parallel: true
+        parallel: true,
       })
     );
   }
@@ -85,7 +85,9 @@ export class Tap {
   public async start(optionsArg?: { throwOnError: boolean }) {
     // lets set the tapbundle promise
     const smartenvInstance = new plugins.smartenv.Smartenv();
-    smartenvInstance.isBrowser ? globalThis.tapbundleDeferred = plugins.smartpromise.defer() : null;
+    smartenvInstance.isBrowser
+      ? (globalThis.tapbundleDeferred = plugins.smartpromise.defer())
+      : null;
 
     // lets continue with running the tests
     const promiseArray: Array<Promise<any>> = [];

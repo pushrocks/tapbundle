@@ -42,7 +42,6 @@ export class TapTest {
     this.testKey = testKeyArg;
     const testNumber = testKeyArg + 1;
     try {
-      
       await this.testFunction(this.tapTools);
       if (this.status === 'timeout') {
         throw new Error('Test succeeded, but timed out...');

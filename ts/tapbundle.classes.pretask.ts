@@ -1,7 +1,6 @@
 import * as plugins from './tapbundle.plugins';
 import { TapTools } from './tapbundle.classes.taptools';
 
-
 export interface IPreTaskFunction {
   (tapTools?: TapTools): Promise<any>;
 }
@@ -15,7 +14,7 @@ export class PreTask {
     this.preTaskFunction = preTaskFunctionArg;
   }
 
-  public async run () {
+  public async run() {
     console.log(`::__PRETASK: ${this.description}`);
     await this.preTaskFunction(new TapTools(null));
   }
