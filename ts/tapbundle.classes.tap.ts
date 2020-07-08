@@ -83,6 +83,11 @@ export class Tap {
    * starts the test evaluation
    */
   public async start(optionsArg?: { throwOnError: boolean }) {
+    // lets set the tapbundle promise
+    const smartenvInstance = new plugins.smartenv.Smartenv();
+    smartenvInstance.isBrowser ? globalThis.tapbundleDeferred = plugins.smartpromise.defer() : null;
+
+    // lets continue with running the tests
     const promiseArray: Array<Promise<any>> = [];
 
     // safeguard against empty test array

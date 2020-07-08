@@ -9,7 +9,7 @@ const test1 = tap.test('my first test -> expect true to be true', async () => {
 });
 
 const test2 = tap.test('my second test', async tools => {
-  await tools.delayFor(1000);
+  await tools.delayFor(50);
 });
 
 const test3 = tap.test(
@@ -17,7 +17,7 @@ const test3 = tap.test(
   async () => {
     expect((await test1).hrtMeasurement.milliSeconds < (await test2).hrtMeasurement.milliSeconds).to
       .be.true;
-    expect((await test2).hrtMeasurement.milliSeconds > 1000).to.be.true;
+    expect((await test2).hrtMeasurement.milliSeconds > 10).to.be.true;
   }
 );
 
@@ -34,9 +34,7 @@ const test5 = tap.test('my 5th test -> should pass in about 500ms', async tools 
 const test6 = tap.skip.test('my 6th test -> should fail after 1000ms', async tools => {
   tools.allowFailure();
   tools.timeout(1000);
-  await tools.delayFor(2000);
+  await tools.delayFor(100);
 });
 
-tap.start().catch(err => {
-  console.log(err);
-});
+tap.start();

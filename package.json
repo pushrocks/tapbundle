@@ -21,6 +21,7 @@
   "homepage": "https://gitlab.com/pushrocks/tapbundle#README",
   "dependencies": {
     "@pushrocks/smartdelay": "^2.0.9",
+    "@pushrocks/smartenv": "^4.0.10",
     "@pushrocks/smartpromise": "^3.0.2",
     "@pushrocks/smarttime": "^3.0.19",
     "smartchai": "^2.0.1"
@@ -28,7 +29,7 @@
   "devDependencies": {
     "@gitzone/tsbuild": "^2.1.24",
     "@gitzone/tsrun": "^1.2.12",
-    "@gitzone/tstest": "^1.0.35",
+    "@gitzone/tstest": "^1.0.36",
     "@types/node": "^14.0.19",
     "randomstring": "^1.1.5",
     "tslint": "^6.1.2",
