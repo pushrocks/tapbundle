@@ -8,13 +8,20 @@ tap bundled for tapbuffer
 * [docs (typedoc)](https://pushrocks.gitlab.io/tapbundle/)
 
 ## Status for master
-[![build status](https://gitlab.com/pushrocks/tapbundle/badges/master/build.svg)](https://gitlab.com/pushrocks/tapbundle/commits/master)
-[![coverage report](https://gitlab.com/pushrocks/tapbundle/badges/master/coverage.svg)](https://gitlab.com/pushrocks/tapbundle/commits/master)
-[![npm downloads per month](https://img.shields.io/npm/dm/@pushrocks/tapbundle.svg)](https://www.npmjs.com/package/@pushrocks/tapbundle)
-[![Known Vulnerabilities](https://snyk.io/test/npm/@pushrocks/tapbundle/badge.svg)](https://snyk.io/test/npm/@pushrocks/tapbundle)
-[![TypeScript](https://img.shields.io/badge/TypeScript->=%203.x-blue.svg)](https://nodejs.org/dist/latest-v10.x/docs/api/)
-[![node](https://img.shields.io/badge/node->=%2010.x.x-blue.svg)](https://nodejs.org/dist/latest-v10.x/docs/api/)
-[![JavaScript Style Guide](https://img.shields.io/badge/code%20style-prettier-ff69b4.svg)](https://prettier.io/)
+
+Status Category | Status Badge
+-- | --
+GitLab Pipelines | [![pipeline status](https://gitlab.com/pushrocks/tapbundle/badges/master/pipeline.svg)](https://lossless.cloud)
+GitLab Pipline Test Coverage | [![coverage report](https://gitlab.com/pushrocks/tapbundle/badges/master/coverage.svg)](https://lossless.cloud)
+npm | [![npm downloads per month](https://badgen.net/npm/dy/@pushrocks/tapbundle)](https://lossless.cloud)
+Snyk | [![Known Vulnerabilities](https://badgen.net/snyk/pushrocks/tapbundle)](https://lossless.cloud)
+TypeScript Support | [![TypeScript](https://badgen.net/badge/TypeScript/>=%203.x/blue?icon=typescript)](https://lossless.cloud)
+node Support | [![node](https://img.shields.io/badge/node->=%2010.x.x-blue.svg)](https://nodejs.org/dist/latest-v10.x/docs/api/)
+Code Style | [![Code Style](https://badgen.net/badge/style/prettier/purple)](https://lossless.cloud)
+PackagePhobia (total standalone install weight) | [![PackagePhobia](https://badgen.net/packagephobia/install/@pushrocks/tapbundle)](https://lossless.cloud)
+PackagePhobia (package size on registry) | [![PackagePhobia](https://badgen.net/packagephobia/publish/@pushrocks/tapbundle)](https://lossless.cloud)
+BundlePhobia (total size when bundled) | [![BundlePhobia](https://badgen.net/bundlephobia/minzip/@pushrocks/tapbundle)](https://lossless.cloud)
+Platform support | [![Supports Windows 10](https://badgen.net/badge/supports%20Windows%2010/yes/green?icon=windows)](https://lossless.cloud) [![Supports Mac OS X](https://badgen.net/badge/supports%20Mac%20OS%20X/yes/green?icon=apple)](https://lossless.cloud)
 
 ## Usage
 
@@ -35,24 +42,24 @@ import { tap, expect } from 'tapbundle'; // has typings in place
 
 import * as myAwesomeModuleToTest from '../dist/index'; // '../dist/index' is the standard path for npmts modules
 
-tap.test('my awesome description', async tools => {
+tap.test('my awesome description', async (tools) => {
   // tools are optional parameter
   tools.timeout(2000); // test will fail if it takes longer than 2000 millisenconds
 });
 
-let myTest2 = tap.test('my awesome test 2', async tools => {
+let myTest2 = tap.test('my awesome test 2', async (tools) => {
   myAwsomeModuleToTest.doSomethingAsync(); // we don't wait here
   await tools.delayFor(3000); // yay! :) promise based timeouts :)
   console.log('This gets logged 3000 ms into the test');
 });
 
-tap.test('my awesome test 3', async tools => {
+tap.test('my awesome test 3', async (tools) => {
   expect(true).to.be.true; // will not throw
   await expect(tools.delayFor(2000)).to.eventually.be.fulfilled; // yay expect promises :)
   expect((await myTest2.promise).hrtMeasurement.milliSeconds > 1000).to.be.true; // access other tests metadata :)
 });
 
-let myTest4 = tap.testParallel('my awesome test 4', async tools => {
+let myTest4 = tap.testParallel('my awesome test 4', async (tools) => {
   await tools.delayFor(4000);
   console.log('logs to console after 4 seconds into this test');
 });

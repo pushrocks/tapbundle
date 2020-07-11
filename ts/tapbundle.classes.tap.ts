@@ -2,7 +2,6 @@ import * as plugins from './tapbundle.plugins';
 
 import { IPreTaskFunction, PreTask } from './tapbundle.classes.pretask';
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
-import { TapWrap, ITapWrapFunction } from './tapbundle.classes.tapwrap';
 export class Tap {
   /**
    * skips a test
@@ -55,13 +54,6 @@ export class Tap {
 
   public preTask(descriptionArg: string, functionArg: IPreTaskFunction) {
     this._tapPreTasks.push(new PreTask(descriptionArg, functionArg));
-  }
-
-  /**
-   * wraps function
-   */
-  public wrap(functionArg: ITapWrapFunction) {
-    return new TapWrap(functionArg);
   }
 
   /**

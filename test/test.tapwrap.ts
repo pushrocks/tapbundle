@@ -1,10 +1,5 @@
-import { tap, expect } from '../ts/index';
+import { tap, expect, TapWrap } from '../ts/index';
 
-const tapwrap = tap.wrap(async () => {
-  tap.test('should do something', async () => {
-    console.log('test1');
-  });
-  tap.start();
-});
+tap.test('should run a test', async () => {});
 
-tapwrap.run();
+tap.start();
