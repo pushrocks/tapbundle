@@ -1,7 +1,7 @@
 {
   "name": "@pushrocks/tapbundle",
   "private": false,
-  "version": "3.2.9",
+  "version": "3.2.10",
   "description": "tap bundled for tapbuffer",
   "main": "dist_ts/index.js",
   "typings": "dist_ts/index.d.ts",
