@@ -34,7 +34,7 @@ export class Tap {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  public async test(
+  public test(
     testDescription: string,
     testFunction: ITestFunction,
     modeArg: 'normal' | 'only' | 'skip' = 'normal'

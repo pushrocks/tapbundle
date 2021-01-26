@@ -20,8 +20,10 @@ export class TapTest {
   public tapTools: TapTools;
   public testFunction: ITestFunction;
   public testKey: number; // the testKey the position in the test qeue. Set upon calling .run()
-  public testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
+  private testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
   public testPromise: Promise<TapTest> = this.testDeferred.promise;
+  private testResultDeferred: Deferred<any> = plugins.smartpromise.defer();
+  public testResultPromise: Promise<any> = this.testResultDeferred.promise;
   /**
    * constructor
    */
@@ -42,7 +44,7 @@ export class TapTest {
     this.testKey = testKeyArg;
     const testNumber = testKeyArg + 1;
     try {
-      await this.testFunction(this.tapTools);
+      const testReturnValue = await this.testFunction(this.tapTools);
       if (this.status === 'timeout') {
         throw new Error('Test succeeded, but timed out...');
       }
@@ -52,12 +54,14 @@ export class TapTest {
       );
       this.status = 'success';
       this.testDeferred.resolve(this);
+      this.testResultDeferred.resolve(testReturnValue);
     } catch (err) {
       this.hrtMeasurement.stop();
       console.log(
         `not ok ${testNumber} - ${this.description} # time=${this.hrtMeasurement.milliSeconds}ms`
       );
       this.testDeferred.resolve(this);
+      this.testResultDeferred.resolve(err);
 
       // if the test has already succeeded before
       if (this.status === 'success') {

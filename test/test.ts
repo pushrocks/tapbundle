@@ -15,9 +15,11 @@ const test2 = tap.test('my second test', async (tools) => {
 const test3 = tap.test(
   'my third test -> test2 should take longer than test1 and endure at least 1000ms',
   async () => {
-    expect((await test1).hrtMeasurement.milliSeconds < (await test2).hrtMeasurement.milliSeconds).to
-      .be.true;
-    expect((await test2).hrtMeasurement.milliSeconds > 1000).to.be.true;
+    expect(
+      (await test1.testPromise).hrtMeasurement.milliSeconds <
+        (await test2).hrtMeasurement.milliSeconds
+    ).to.be.true;
+    expect((await test2.testPromise).hrtMeasurement.milliSeconds > 1000).to.be.true;
   }
 );
 
