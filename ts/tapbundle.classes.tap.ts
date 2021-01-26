@@ -2,7 +2,7 @@ import * as plugins from './tapbundle.plugins';
 
 import { IPreTaskFunction, PreTask } from './tapbundle.classes.pretask';
 import { TapTest, ITestFunction } from './tapbundle.classes.taptest';
-export class Tap {
+export class Tap <T> {
   /**
    * skips a test
    * tests marked with tap.skip.test() are never executed
@@ -20,14 +20,14 @@ export class Tap {
    * only executes tests marked as ONLY
    */
   public only = {
-    test: (descriptionArg: string, testFunctionArg: ITestFunction) => {
+    test: (descriptionArg: string, testFunctionArg: ITestFunction<T>) => {
       this.test(descriptionArg, testFunctionArg, 'only');
     },
   };
 
   private _tapPreTasks: PreTask[] = [];
-  private _tapTests: TapTest[] = [];
-  private _tapTestsOnly: TapTest[] = [];
+  private _tapTests: TapTest<any>[] = [];
+  private _tapTestsOnly: TapTest<any>[] = [];
 
   /**
    * Normal test function, will run one by one
@@ -36,10 +36,10 @@ export class Tap {
    */
   public test(
     testDescription: string,
-    testFunction: ITestFunction,
+    testFunction: ITestFunction<T>,
     modeArg: 'normal' | 'only' | 'skip' = 'normal'
   ) {
-    const localTest = new TapTest({
+    const localTest = new TapTest<T>({
       description: testDescription,
       testFunction,
       parallel: false,

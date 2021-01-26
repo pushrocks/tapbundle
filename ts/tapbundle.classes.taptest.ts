@@ -9,25 +9,25 @@ import { HrtMeasurement } from '@pushrocks/smarttime';
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';
 
-export type ITestFunction = (tapTools?: TapTools) => Promise<any>;
+export interface ITestFunction <T = unknown> { (tapTools?: TapTools): Promise<T> };
 
-export class TapTest {
+export class TapTest <T = unknown> {
   public description: string;
   public failureAllowed: boolean;
   public hrtMeasurement: HrtMeasurement;
   public parallel: boolean;
   public status: TTestStatus;
   public tapTools: TapTools;
-  public testFunction: ITestFunction;
+  public testFunction: ITestFunction<T>;
   public testKey: number; // the testKey the position in the test qeue. Set upon calling .run()
-  private testDeferred: Deferred<TapTest> = plugins.smartpromise.defer();
-  public testPromise: Promise<TapTest> = this.testDeferred.promise;
-  private testResultDeferred: Deferred<any> = plugins.smartpromise.defer();
-  public testResultPromise: Promise<any> = this.testResultDeferred.promise;
+  private testDeferred: Deferred<TapTest<T>> = plugins.smartpromise.defer();
+  public testPromise: Promise<TapTest<T>> = this.testDeferred.promise;
+  private testResultDeferred: Deferred<T> = plugins.smartpromise.defer();
+  public testResultPromise: Promise<T> = this.testResultDeferred.promise;
   /**
    * constructor
    */
-  constructor(optionsArg: { description: string; testFunction: ITestFunction; parallel: boolean }) {
+  constructor(optionsArg: { description: string; testFunction: ITestFunction<T>; parallel: boolean }) {
     this.description = optionsArg.description;
     this.hrtMeasurement = new HrtMeasurement();
     this.parallel = optionsArg.parallel;

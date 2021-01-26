@@ -23,12 +23,14 @@ const test3 = tap.test(
   }
 );
 
-const test4 = tap.skip.test('my 4th test -> should fail', async (tools) => {
+const test4 = tap.test('my 4th test -> should fail', async (tools) => {
   tools.allowFailure();
   expect(false).to.be.true;
+  return 'hello';
 });
 
 const test5 = tap.test('my 5th test -> should pass in about 500ms', async (tools) => {
+  const test4Result = await test4.testResultPromise;
   tools.timeout(1000);
   await tools.delayFor(500);
 });
