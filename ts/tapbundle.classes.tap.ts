@@ -8,10 +8,10 @@ export class Tap <T> {
    * tests marked with tap.skip.test() are never executed
    */
   public skip = {
-    test: (descriptionArg: string, functionArg: ITestFunction) => {
+    test: (descriptionArg: string, functionArg: ITestFunction<T>) => {
       console.log(`skipped test: ${descriptionArg}`);
     },
-    testParallel: (descriptionArg: string, functionArg: ITestFunction) => {
+    testParallel: (descriptionArg: string, functionArg: ITestFunction<T>) => {
       console.log(`skipped test: ${descriptionArg}`);
     },
   };
@@ -38,7 +38,7 @@ export class Tap <T> {
     testDescription: string,
     testFunction: ITestFunction<T>,
     modeArg: 'normal' | 'only' | 'skip' = 'normal'
-  ) {
+  ): TapTest<T> {
     const localTest = new TapTest<T>({
       description: testDescription,
       testFunction,
@@ -61,7 +61,7 @@ export class Tap <T> {
    * @param testDescription - A description of what the test does
    * @param testFunction - A Function that returns a Promise and resolves or rejects
    */
-  public testParallel(testDescription: string, testFunction: ITestFunction) {
+  public testParallel(testDescription: string, testFunction: ITestFunction<T>) {
     this._tapTests.push(
       new TapTest({
         description: testDescription,

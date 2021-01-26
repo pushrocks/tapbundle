@@ -9,7 +9,7 @@ import { HrtMeasurement } from '@pushrocks/smarttime';
 // interfaces
 export type TTestStatus = 'success' | 'error' | 'pending' | 'errorAfterSuccess' | 'timeout';
 
-export interface ITestFunction <T = unknown> { (tapTools?: TapTools): Promise<T> };
+export interface ITestFunction <T> { (tapTools?: TapTools): Promise<T> };
 
 export class TapTest <T = unknown> {
   public description: string;
