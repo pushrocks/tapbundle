@@ -1,8 +1,13 @@
 import { tap, expect, webhelpers } from '../ts/index';
 
-tap.preTask('hi there', async () => {
-  const myElement = webhelpers.fixture(webhelpers.html`<div></div>`);
+tap.preTask('custompretask', async () => {
   console.log('this is a pretask');
+});
+
+tap.test('should have access to webhelpers', async () => {
+  const myElement = await webhelpers.fixture(webhelpers.html`<div></div>`);
+  expect(myElement).to.be.instanceOf(HTMLElement);
+  console.log(myElement);
 });
 
 const test1 = tap.test('my first test -> expect true to be true', async () => {
