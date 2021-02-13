@@ -1,6 +1,7 @@
-import { tap, expect } from '../ts/index';
+import { tap, expect, webhelpers } from '../ts/index';
 
 tap.preTask('hi there', async () => {
+  const myElement = webhelpers.fixture(webhelpers.html`<div></div>`);
   console.log('this is a pretask');
 });
 

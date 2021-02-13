@@ -25,7 +25,7 @@ const test3 = tap.test(
 
 const test4 = tap.test('my 4th test -> should fail', async (tools) => {
   tools.allowFailure();
-  expect(false).to.be.true;
+  expect(false).to.be.false;
   return 'hello';
 });
 
